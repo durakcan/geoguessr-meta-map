@@ -4,10 +4,6 @@
     "code": "FR",
     "region": "Europe",
     "driving": "Right",
-    "plates": "White, black text, blue EU strip on left with 'F'",
-    "bollards": "Slim white posts with a red or white reflective top band",
-    "coverage": "Mostly car; matte/soft image quality in rural areas",
-    "terrain": "Plane trees lining rural roads; red-tiled roofs in the south",
     "tells": [
       "Département number often printed at the end of the plate",
       "Wide gravel road shoulders (accotements) are common",
@@ -19,10 +15,6 @@
     "code": "DE",
     "region": "Europe",
     "driving": "Right",
-    "plates": "White, black text, blue EU strip with 'D', city code + letters/numbers",
-    "bollards": "White posts with red/white reflectors, very uniform and well maintained",
-    "coverage": "Sharp, high-quality car coverage; camera often mounted lower than neighbors",
-    "terrain": "Immaculate asphalt, dense forest (Wald) signage, half-timbered houses in the south",
     "tells": [
       "Yellow diamond priority-road signs are everywhere",
       "Kilometer marker posts are white with black numbers",
