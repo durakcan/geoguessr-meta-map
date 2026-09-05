@@ -301,6 +301,80 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   cursor:pointer;
   font-family:'JetBrains Mono', monospace;
 }
+
+/* ---- GitHub sync ---- */
+.gh-toggle{
+  font-size:0.72rem;
+  color:var(--ink-dim);
+  cursor:pointer;
+  text-decoration:underline dotted;
+  text-underline-offset:3px;
+}
+.gh-toggle:hover{ color:var(--accent); }
+.gh-panel{
+  display:none;
+  background:var(--panel);
+  border:1px solid var(--line-strong);
+  padding:16px 18px;
+  margin-bottom:18px;
+  font-size:0.8rem;
+}
+.gh-panel.open{ display:block; }
+.gh-panel h3{
+  font-family:'Fraunces', serif;
+  font-weight:500;
+  font-size:1rem;
+  color:var(--paper);
+  margin:0 0 10px 0;
+}
+.gh-row{
+  display:grid;
+  grid-template-columns:110px 1fr;
+  gap:10px;
+  align-items:center;
+  margin-bottom:8px;
+}
+.gh-row label{ color:var(--ink-dim); font-size:0.74rem; }
+.gh-row input{
+  background:var(--panel-2);
+  border:1px solid var(--line-strong);
+  color:var(--paper);
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.8rem;
+  padding:7px 10px;
+  outline:none;
+  width:100%;
+}
+.gh-row input:focus{ border-color:var(--accent); }
+.gh-actions{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+.gh-btn{
+  background:var(--panel-2);
+  border:1px solid var(--line-strong);
+  color:var(--paper);
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.75rem;
+  padding:7px 12px;
+  cursor:pointer;
+}
+.gh-btn:hover{ border-color:var(--accent); color:var(--accent); }
+.gh-btn:disabled{ opacity:0.5; cursor:default; }
+.gh-note{
+  font-size:0.7rem;
+  color:var(--ink-dim);
+  line-height:1.5;
+  margin-top:10px;
+}
+
+.cloud-status{
+  font-size:0.7rem;
+  color:#8b8272;
+  margin:2px 0 18px 0;
+}
 </style>
 </head>
 <body>
@@ -313,6 +387,21 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
     </div>
     <div class="count-badge"><b id="count">0</b>countries logged</div>
   </header>
+
+  <p style="margin:0 0 14px;"><span class="gh-toggle" id="ghToggle">⚙ GitHub backup settings</span></p>
+  <div class="gh-panel" id="ghPanel">
+    <h3>Connect a GitHub repo</h3>
+    <div class="gh-row"><label>Owner/org</label><input id="ghOwner" placeholder="your-github-username"></div>
+    <div class="gh-row"><label>Repo name</label><input id="ghRepo" placeholder="geoguessr-cheatsheet"></div>
+    <div class="gh-row"><label>Branch</label><input id="ghBranch" placeholder="main"></div>
+    <div class="gh-row"><label>Token</label><input id="ghToken" type="password" placeholder="fine-grained personal access token"></div>
+    <div class="gh-actions">
+      <button class="gh-btn" id="ghSave">Save connection</button>
+      <button class="gh-btn" id="ghTest">Test connection</button>
+    </div>
+    <div class="gh-note" id="ghConnStatus"></div>
+    <div class="gh-note">Data is stored one file per country at <code>meta-atlas-data/&lt;CODE&gt;.json</code> in this repo. The token is saved only in this browser and sent only to api.github.com.</div>
+  </div>
 
   <div class="search-row">
     <input id="search" type="text" placeholder="Search a country…" autocomplete="off">
@@ -512,6 +601,12 @@ async function deleteImage(id){
   });
 }
 
+async function replaceAllImages(code, dataURLs){
+  const existing = await getImages(code);
+  for(const rec of existing){ await deleteImage(rec.id); }
+  for(const src of dataURLs){ await addImage(code, src); }
+}
+
 // Downscale + re-encode an image file so it takes far less storage space.
 function compressImage(file, maxDim = 1600, quality = 0.82){
   return new Promise((resolve, reject) => {
@@ -550,9 +645,66 @@ function saveNotes(code, text){
   }
 }
 
+function isGhConnected(){
+  const { owner, repo, token } = getGhSettings();
+  return !!(owner && repo && token);
+}
+
+async function silentPullCountry(code){
+  const { owner, repo, branch, token } = getGhSettings();
+  if(!owner || !repo || !token) return false;
+  try{
+    const path = `${GH_PATH_PREFIX}${code}.json`;
+    const file = await ghGetFile(owner, repo, branch || 'main', path, token);
+    if(!file) return false;
+    const data = JSON.parse(base64ToUtf8(file.content.replace(/\n/g, '')));
+    saveNotes(code, data.notes || '');
+    await replaceAllImages(code, data.images || []);
+    return true;
+  }catch(err){
+    console.error('Auto-pull failed:', err);
+    return false;
+  }
+}
+
+async function silentPushCountry(code, name){
+  const { owner, repo, branch, token } = getGhSettings();
+  if(!owner || !repo || !token) return false;
+  try{
+    const notes = loadNotes(code);
+    const images = (await getImages(code)).map(r => r.src);
+    const path = `${GH_PATH_PREFIX}${code}.json`;
+    const existing = await ghGetFile(owner, repo, branch || 'main', path, token);
+    await ghPutFile(owner, repo, branch || 'main', path, token,
+      { country: name, code, notes, images },
+      existing ? existing.sha : null,
+      `Update ${name} notes/images`
+    );
+    return true;
+  }catch(err){
+    console.error('Auto-push failed:', err);
+    return false;
+  }
+}
+
 async function renderDossier(name){
   const c = DATA.find(d => d.name === name);
   if(!c) return;
+  const connected = isGhConnected();
+
+  // If connected, pull the latest saved version for this country before showing it,
+  // so opening a country always reflects what's in the repo.
+  if(connected){
+    dossierPane.innerHTML = `
+      <div class="dossier-head">
+        <div class="dossier-flag">${flagEmoji(c.code)}</div>
+        <div class="dossier-name">${c.name}</div>
+      </div>
+      <div class="cloud-status" id="cloudStatus">☁ checking GitHub…</div>
+    `;
+    await silentPullCountry(c.code);
+  }
+
   const notes = loadNotes(c.code);
 
   dossierPane.innerHTML = `
@@ -560,6 +712,7 @@ async function renderDossier(name){
       <div class="dossier-flag">${flagEmoji(c.code)}</div>
       <div class="dossier-name">${c.name}</div>
     </div>
+    <div class="cloud-status" id="cloudStatus">${connected ? '☁ auto-sync on — synced' : '☁ not connected — set up GitHub backup above to auto-save here'}</div>
 
     <div class="user-section" style="margin-top:14px; border-top:none; padding-top:0;">
       <div class="k">MY NOTES</div>
@@ -577,15 +730,30 @@ async function renderDossier(name){
 
   const notesBox = document.getElementById('notesBox');
   const notesStatus = document.getElementById('notesStatus');
+  const cloudStatus = document.getElementById('cloudStatus');
   notesBox.addEventListener('input', () => {
     clearTimeout(notesSaveTimer);
     notesStatus.textContent = "saving…";
-    notesSaveTimer = setTimeout(() => {
+    notesSaveTimer = setTimeout(async () => {
       const ok = saveNotes(c.code, notesBox.value);
       notesStatus.textContent = ok ? "saved" : "could not save";
       setTimeout(() => { if(notesStatus.textContent === "saved") notesStatus.textContent = ""; }, 1200);
+      if(ok && isGhConnected()){
+        cloudStatus.textContent = "☁ syncing…";
+        const pushed = await silentPushCountry(c.code, c.name);
+        cloudStatus.textContent = pushed ? "☁ auto-sync on — synced" : "☁ sync failed — check settings/token";
+      }
     }, 500);
   });
+}
+
+async function autoPushAfterImageChange(code){
+  const country = DATA.find(d => d.code === code);
+  const cloudStatus = document.getElementById('cloudStatus');
+  if(!isGhConnected()) return;
+  if(cloudStatus) cloudStatus.textContent = "☁ syncing…";
+  const pushed = await silentPushCountry(code, country ? country.name : code);
+  if(cloudStatus) cloudStatus.textContent = pushed ? "☁ auto-sync on — synced" : "☁ sync failed — check settings/token";
 }
 
 async function renderImageGrid(code){
@@ -604,7 +772,8 @@ async function renderImageGrid(code){
     tile.querySelector('.rm').addEventListener('click', async (e) => {
       e.stopPropagation();
       await deleteImage(rec.id);
-      renderImageGrid(code);
+      await renderImageGrid(code);
+      autoPushAfterImageChange(code);
     });
     grid.appendChild(tile);
   });
@@ -637,6 +806,7 @@ imageFileInput.addEventListener('change', async (e) => {
     }
   }
   await renderImageGrid(code);
+  autoPushAfterImageChange(code);
   if(failed > 0){
     alert(`${failed} image(s) couldn't be saved. Your browser's storage may be full or blocking this — try removing a few older images.`);
   }
@@ -653,6 +823,99 @@ function closeLightbox(){
 document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
 document.getElementById('lightbox').addEventListener('click', (e) => {
   if(e.target.id === 'lightbox') closeLightbox();
+});
+
+/* ---- GitHub backup: one JSON file per country in a repo you control ---- */
+const GH_SETTINGS_KEY = 'metaAtlas_ghSettings';
+const GH_PATH_PREFIX = 'meta-atlas-data/';
+
+function getGhSettings(){
+  try{
+    return JSON.parse(localStorage.getItem(GH_SETTINGS_KEY)) || {};
+  }catch(e){ return {}; }
+}
+function saveGhSettings(s){
+  localStorage.setItem(GH_SETTINGS_KEY, JSON.stringify(s));
+}
+
+function utf8ToBase64(str){
+  return btoa(unescape(encodeURIComponent(str)));
+}
+function base64ToUtf8(b64){
+  return decodeURIComponent(escape(atob(b64)));
+}
+
+function ghHeaders(token){
+  return {
+    'Authorization': `token ${token}`,
+    'Accept': 'application/vnd.github+json'
+  };
+}
+
+async function ghGetFile(owner, repo, branch, path, token){
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
+  const res = await fetch(url, { headers: ghHeaders(token) });
+  if(res.status === 404) return null;
+  if(!res.ok) throw new Error(`GitHub GET failed: ${res.status} ${await res.text()}`);
+  return res.json(); // { sha, content (base64, may have newlines), ... }
+}
+
+async function ghPutFile(owner, repo, branch, path, token, contentObj, existingSha, message){
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+  const body = {
+    message,
+    content: utf8ToBase64(JSON.stringify(contentObj, null, 2)),
+    branch
+  };
+  if(existingSha) body.sha = existingSha;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: { ...ghHeaders(token), 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if(!res.ok) throw new Error(`GitHub PUT failed: ${res.status} ${await res.text()}`);
+  return res.json();
+}
+
+// Settings panel wiring
+const ghPanel = document.getElementById('ghPanel');
+document.getElementById('ghToggle').addEventListener('click', () => ghPanel.classList.toggle('open'));
+
+(function initGhForm(){
+  const s = getGhSettings();
+  document.getElementById('ghOwner').value = s.owner || '';
+  document.getElementById('ghRepo').value = s.repo || '';
+  document.getElementById('ghBranch').value = s.branch || 'main';
+  document.getElementById('ghToken').value = s.token || '';
+})();
+
+document.getElementById('ghSave').addEventListener('click', () => {
+  const s = {
+    owner: document.getElementById('ghOwner').value.trim(),
+    repo: document.getElementById('ghRepo').value.trim(),
+    branch: document.getElementById('ghBranch').value.trim() || 'main',
+    token: document.getElementById('ghToken').value.trim()
+  };
+  saveGhSettings(s);
+  document.getElementById('ghConnStatus').textContent = 'saved.';
+  setTimeout(() => { document.getElementById('ghConnStatus').textContent = ''; }, 1500);
+});
+
+document.getElementById('ghTest').addEventListener('click', async () => {
+  const conn = document.getElementById('ghConnStatus');
+  const { owner, repo, branch, token } = getGhSettings();
+  if(!owner || !repo || !token){ conn.textContent = 'fill in owner, repo and token first.'; return; }
+  conn.textContent = 'testing…';
+  try{
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers: ghHeaders(token) });
+    if(res.ok){
+      conn.textContent = `connected to ${owner}/${repo} ✓`;
+    }else{
+      conn.textContent = `could not connect (${res.status}) — check owner/repo/token.`;
+    }
+  }catch(e){
+    conn.textContent = 'connection error — check your internet connection.';
+  }
 });
 
 // One-time migration: move any data saved under the old scheme
