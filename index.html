@@ -436,7 +436,6 @@ function renderList(filter=""){
       row.className = 'country-row' + (country.name === activeName ? ' active' : '');
       row.innerHTML = `<span class="flag">${flagEmoji(country.code)}</span><span>${country.name}</span>`;
       row.addEventListener('click', () => selectCountry(country.name));
-      row.addEventListener('mouseenter', () => { if(!('ontouchstart' in window)) previewCountry(country.name); });
       listPane.appendChild(row);
     });
   });
@@ -447,10 +446,6 @@ function renderList(filter=""){
     none.textContent = 'No country matches your search.';
     listPane.appendChild(none);
   }
-}
-
-function previewCountry(name){
-  renderDossier(name);
 }
 
 function selectCountry(name){
