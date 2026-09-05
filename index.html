@@ -669,7 +669,7 @@ async function silentPullCountry(code){
 
 async function silentPushCountry(code, name){
   const { owner, repo, branch, token } = getGhSettings();
-  if(!owner || !repo || !token) return false;
+  if(!owner || !repo || !token) return { ok:false, error:'not connected' };
   try{
     const notes = loadNotes(code);
     const images = (await getImages(code)).map(r => r.src);
@@ -680,10 +680,10 @@ async function silentPushCountry(code, name){
       existing ? existing.sha : null,
       `Update ${name} notes/images`
     );
-    return true;
+    return { ok:true };
   }catch(err){
     console.error('Auto-push failed:', err);
-    return false;
+    return { ok:false, error: (err && err.message ? err.message : String(err)).slice(0, 160) };
   }
 }
 
@@ -740,8 +740,8 @@ async function renderDossier(name){
       setTimeout(() => { if(notesStatus.textContent === "saved") notesStatus.textContent = ""; }, 1200);
       if(ok && isGhConnected()){
         cloudStatus.textContent = "☁ syncing…";
-        const pushed = await silentPushCountry(c.code, c.name);
-        cloudStatus.textContent = pushed ? "☁ auto-sync on — synced" : "☁ sync failed — check settings/token";
+        const result = await silentPushCountry(c.code, c.name);
+        cloudStatus.textContent = result.ok ? "☁ auto-sync on — synced" : `☁ sync failed: ${result.error}`;
       }
     }, 500);
   });
@@ -752,8 +752,8 @@ async function autoPushAfterImageChange(code){
   const cloudStatus = document.getElementById('cloudStatus');
   if(!isGhConnected()) return;
   if(cloudStatus) cloudStatus.textContent = "☁ syncing…";
-  const pushed = await silentPushCountry(code, country ? country.name : code);
-  if(cloudStatus) cloudStatus.textContent = pushed ? "☁ auto-sync on — synced" : "☁ sync failed — check settings/token";
+  const result = await silentPushCountry(code, country ? country.name : code);
+  if(cloudStatus) cloudStatus.textContent = result.ok ? "☁ auto-sync on — synced" : `☁ sync failed: ${result.error}`;
 }
 
 async function renderImageGrid(code){
@@ -852,11 +852,20 @@ function ghHeaders(token){
   };
 }
 
+async function extractGhErrorMessage(res){
+  try{
+    const data = await res.json();
+    return data.message || res.statusText || `HTTP ${res.status}`;
+  }catch(e){
+    return `HTTP ${res.status} ${res.statusText}`;
+  }
+}
+
 async function ghGetFile(owner, repo, branch, path, token){
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
   const res = await fetch(url, { headers: ghHeaders(token) });
   if(res.status === 404) return null;
-  if(!res.ok) throw new Error(`GitHub GET failed: ${res.status} ${await res.text()}`);
+  if(!res.ok) throw new Error(`(${res.status}) ${await extractGhErrorMessage(res)}`);
   return res.json(); // { sha, content (base64, may have newlines), ... }
 }
 
@@ -873,7 +882,7 @@ async function ghPutFile(owner, repo, branch, path, token, contentObj, existingS
     headers: { ...ghHeaders(token), 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   });
-  if(!res.ok) throw new Error(`GitHub PUT failed: ${res.status} ${await res.text()}`);
+  if(!res.ok) throw new Error(`(${res.status}) ${await extractGhErrorMessage(res)}`);
   return res.json();
 }
 
