@@ -883,8 +883,10 @@ async function extractGhErrorMessage(res){
 }
 
 async function ghGetFile(owner, repo, branch, path, token){
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
-  const res = await fetch(url, { headers: ghHeaders(token) });
+  // cache: 'no-store' + a timestamp param stop the browser from ever serving
+  // a stale cached response here — we always need the file's current sha.
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}&_=${Date.now()}`;
+  const res = await fetch(url, { headers: { ...ghHeaders(token), 'Cache-Control': 'no-cache' }, cache: 'no-store' });
   if(res.status === 404) return null;
   if(!res.ok) throw new Error(`(${res.status}) ${await extractGhErrorMessage(res)}`);
   return res.json(); // { sha, content (base64, may have newlines), ... }
