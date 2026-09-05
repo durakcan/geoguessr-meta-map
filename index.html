@@ -50,7 +50,7 @@ body{
 
 header{
   display:flex;
-  justify-content:space-between;
+  justify-space:between;
   align-items:flex-end;
   gap:24px;
   border-bottom:1px solid var(--line-strong);
@@ -1362,20 +1362,8 @@ async function extractGhErrorMessage(res){
 
 
 /* =========================================================
-   GITHUB GET FILE
+   GITHUB GET FILE (UPDATED WITH CACHE BUSTING FIX)
 ========================================================= */
-
-/*
- * IMPORTANT:
- *
- * There is deliberately NO Cache-Control request header.
- *
- * The GitHub API itself is queried directly.
- *
- * We also don't add a fake "_" timestamp parameter anymore.
- * The previous version tried to solve browser caching that
- * way, but it makes debugging the actual API request harder.
- */
 
 async function ghGetFile(
   owner,
@@ -1385,9 +1373,10 @@ async function ghGetFile(
   token
 ){
 
+  const cacheBuster = new Date().getTime();
   const url =
     `https://api.github.com/repos/${owner}/${repo}/contents/${path}` +
-    `?ref=${encodeURIComponent(branch)}`;
+    `?ref=${encodeURIComponent(branch)}&_t=${cacheBuster}`;
 
   console.log(
     '[Meta Atlas GitHub GET]',
@@ -1401,7 +1390,11 @@ async function ghGetFile(
         url,
         {
           method:'GET',
-          headers:ghHeaders(token)
+          headers: {
+            ...ghHeaders(token),
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
+          }
         }
       );
 
