@@ -374,6 +374,7 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   font-size:0.7rem;
   color:#8b8272;
   margin:2px 0 18px 0;
+  word-break:break-word;
 }
 </style>
 </head>
@@ -689,6 +690,7 @@ async function pushCountryOnce(code, name, attempt = 1){
     const images = (await getImages(code)).map(r => r.src);
     const path = `${GH_PATH_PREFIX}${code}.json`;
     const existing = await ghGetFile(owner, repo, branch || 'main', path, token);
+    console.log(`[meta-atlas sync] attempt ${attempt} for ${code}: existing sha =`, existing ? existing.sha : '(none — will create new file)');
     await ghPutFile(owner, repo, branch || 'main', path, token,
       { country: name, code, notes, images },
       existing ? existing.sha : null,
@@ -697,14 +699,14 @@ async function pushCountryOnce(code, name, attempt = 1){
     return { ok:true };
   }catch(err){
     const msg = (err && err.message ? err.message : String(err));
+    console.error(`[meta-atlas sync] attempt ${attempt} failed for ${code}:`, msg);
     // 409 = the file changed on GitHub between our read and write (stale sha).
     // Wait briefly (letting GitHub's backend catch up), then re-fetch and retry.
     if(msg.includes('(409)') && attempt < 5){
       await delay(400 * attempt);
       return pushCountryOnce(code, name, attempt + 1);
     }
-    console.error('Auto-push failed:', err);
-    return { ok:false, error: msg.slice(0, 160) };
+    return { ok:false, error: msg.slice(0, 300) };
   }
 }
 
