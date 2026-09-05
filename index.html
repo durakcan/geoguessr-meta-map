@@ -70,7 +70,12 @@ h1 span{ color:var(--accent); font-style:italic; font-weight:400; }
   text-align:right;
   line-height:1.6;
 }
-.count-badge b{ color:var(--accent); font-size:1.1rem; display:block; font-family:'Fraunces', serif; }
+.count-badge b{
+  color:var(--accent);
+  font-size:1.1rem;
+  display:block;
+  font-family:'Fraunces', serif;
+}
 
 /* ---- Search ---- */
 .search-row{
@@ -109,7 +114,9 @@ input#search:focus{ border-color:var(--accent); }
   max-height:640px;
   overflow-y:auto;
 }
-@media (max-width:760px){ .list-pane{ max-height:280px; } }
+@media (max-width:760px){
+  .list-pane{ max-height:280px; }
+}
 
 .region-label{
   font-size:0.68rem;
@@ -120,6 +127,7 @@ input#search:focus{ border-color:var(--accent); }
   top:0;
   background:var(--panel);
 }
+
 .country-row{
   display:flex;
   align-items:center;
@@ -130,13 +138,16 @@ input#search:focus{ border-color:var(--accent); }
   color:var(--ink);
   border-left:2px solid transparent;
 }
+
 .country-row .flag{ font-size:1rem; }
 .country-row:hover{ background:var(--panel-2); }
+
 .country-row.active{
   background:var(--panel-2);
   border-left:2px solid var(--accent);
   color:var(--paper);
 }
+
 .no-results{
   padding:16px 14px;
   color:var(--ink-dim);
@@ -151,7 +162,10 @@ input#search:focus{ border-color:var(--accent); }
   position:relative;
   overflow:hidden;
 }
-@media (max-width:760px){ .dossier-pane{ padding:24px 20px; } }
+
+@media (max-width:760px){
+  .dossier-pane{ padding:24px 20px; }
+}
 
 .empty-state{
   height:100%;
@@ -162,13 +176,19 @@ input#search:focus{ border-color:var(--accent); }
   justify-content:center;
   color:#57606d;
 }
+
 .empty-state .big{
   font-family:'Fraunces', serif;
   font-size:1.6rem;
   color:#2c3746;
   margin-bottom:8px;
 }
-.empty-state p{ font-size:0.85rem; max-width:34ch; line-height:1.6; }
+
+.empty-state p{
+  font-size:0.85rem;
+  max-width:34ch;
+  line-height:1.6;
+}
 
 .dossier-head{
   display:flex;
@@ -177,13 +197,19 @@ input#search:focus{ border-color:var(--accent); }
   margin-bottom:4px;
   position:relative;
 }
-.dossier-flag{ font-size:2.4rem; line-height:1; }
+
+.dossier-flag{
+  font-size:2.4rem;
+  line-height:1;
+}
+
 .dossier-name{
   font-family:'Fraunces', serif;
   font-size:2.1rem;
   font-weight:500;
   color:#1c2530;
 }
+
 footer{
   margin-top:22px;
   font-size:0.68rem;
@@ -191,19 +217,21 @@ footer{
   line-height:1.6;
 }
 
-/* ---- My notes & images (user-added) ---- */
+/* ---- My notes & images ---- */
 .user-section{
   margin-top:26px;
   padding-top:20px;
   border-top:1px dashed rgba(28,37,48,0.25);
   position:relative;
 }
+
 .user-section .k{
   font-size:0.64rem;
   letter-spacing:0.08em;
   color:#8a6a3f;
   margin-bottom:10px;
 }
+
 textarea#notesBox{
   width:100%;
   min-height:90px;
@@ -217,7 +245,11 @@ textarea#notesBox{
   padding:10px 12px;
   outline:none;
 }
-textarea#notesBox:focus{ border-color:#8a6a3f; }
+
+textarea#notesBox:focus{
+  border-color:#8a6a3f;
+}
+
 .notes-status{
   font-size:0.65rem;
   color:#8b8272;
@@ -231,6 +263,7 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   gap:10px;
   margin-top:12px;
 }
+
 .image-tile{
   position:relative;
   aspect-ratio:1/1;
@@ -239,12 +272,14 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   cursor:pointer;
   overflow:hidden;
 }
+
 .image-tile img{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
 }
+
 .image-tile .rm{
   position:absolute;
   top:2px;
@@ -260,7 +295,11 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   cursor:pointer;
   padding:0;
 }
-.image-tile .rm:hover{ background:#a33; }
+
+.image-tile .rm:hover{
+  background:#a33;
+}
+
 .add-image-tile{
   aspect-ratio:1/1;
   border:1px dashed rgba(28,37,48,0.35);
@@ -274,8 +313,15 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   cursor:pointer;
   background:rgba(28,37,48,0.03);
 }
-.add-image-tile span{ font-size:0.62rem; letter-spacing:0.04em; }
-.add-image-tile:hover{ background:rgba(28,37,48,0.07); }
+
+.add-image-tile span{
+  font-size:0.62rem;
+  letter-spacing:0.04em;
+}
+
+.add-image-tile:hover{
+  background:rgba(28,37,48,0.07);
+}
 
 .lightbox-overlay{
   position:fixed;
@@ -287,11 +333,13 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   z-index:50;
   padding:30px;
 }
+
 .lightbox-overlay img{
   max-width:100%;
   max-height:100%;
   box-shadow:0 10px 40px rgba(0,0,0,0.5);
 }
+
 .lightbox-close{
   position:absolute;
   top:18px;
@@ -310,7 +358,11 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   text-decoration:underline dotted;
   text-underline-offset:3px;
 }
-.gh-toggle:hover{ color:var(--accent); }
+
+.gh-toggle:hover{
+  color:var(--accent);
+}
+
 .gh-panel{
   display:none;
   background:var(--panel);
@@ -319,7 +371,11 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   margin-bottom:18px;
   font-size:0.8rem;
 }
-.gh-panel.open{ display:block; }
+
+.gh-panel.open{
+  display:block;
+}
+
 .gh-panel h3{
   font-family:'Fraunces', serif;
   font-weight:500;
@@ -327,6 +383,7 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   color:var(--paper);
   margin:0 0 10px 0;
 }
+
 .gh-row{
   display:grid;
   grid-template-columns:110px 1fr;
@@ -334,7 +391,12 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   align-items:center;
   margin-bottom:8px;
 }
-.gh-row label{ color:var(--ink-dim); font-size:0.74rem; }
+
+.gh-row label{
+  color:var(--ink-dim);
+  font-size:0.74rem;
+}
+
 .gh-row input{
   background:var(--panel-2);
   border:1px solid var(--line-strong);
@@ -345,13 +407,18 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   outline:none;
   width:100%;
 }
-.gh-row input:focus{ border-color:var(--accent); }
+
+.gh-row input:focus{
+  border-color:var(--accent);
+}
+
 .gh-actions{
   display:flex;
   gap:10px;
   margin-top:10px;
   flex-wrap:wrap;
 }
+
 .gh-btn{
   background:var(--panel-2);
   border:1px solid var(--line-strong);
@@ -361,8 +428,17 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
   padding:7px 12px;
   cursor:pointer;
 }
-.gh-btn:hover{ border-color:var(--accent); color:var(--accent); }
-.gh-btn:disabled{ opacity:0.5; cursor:default; }
+
+.gh-btn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+.gh-btn:disabled{
+  opacity:0.5;
+  cursor:default;
+}
+
 .gh-note{
   font-size:0.7rem;
   color:var(--ink-dim);
@@ -378,50 +454,107 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
 }
 </style>
 </head>
+
 <body>
 <div class="app">
 
   <header>
     <div>
       <h1>Meta <span>Atlas</span></h1>
-      <p class="subtitle">A field-note reference of GeoGuessr country tells — bollards, plates, driving side, coverage cars, and terrain. Click a country to open its dossier.</p>
+      <p class="subtitle">
+        A field-note reference of GeoGuessr country tells — bollards, plates,
+        driving side, coverage cars, and terrain. Click a country to open its dossier.
+      </p>
     </div>
-    <div class="count-badge"><b id="count">0</b>countries logged</div>
+
+    <div class="count-badge">
+      <b id="count">0</b>countries logged
+    </div>
   </header>
 
-  <p style="margin:0 0 14px;"><span class="gh-toggle" id="ghToggle">⚙ GitHub backup settings</span></p>
+  <p style="margin:0 0 14px;">
+    <span class="gh-toggle" id="ghToggle">⚙ GitHub backup settings</span>
+  </p>
+
   <div class="gh-panel" id="ghPanel">
     <h3>Connect a GitHub repo</h3>
-    <div class="gh-row"><label>Owner/org</label><input id="ghOwner" placeholder="your-github-username"></div>
-    <div class="gh-row"><label>Repo name</label><input id="ghRepo" placeholder="geoguessr-cheatsheet"></div>
-    <div class="gh-row"><label>Branch</label><input id="ghBranch" placeholder="main"></div>
-    <div class="gh-row"><label>Token</label><input id="ghToken" type="password" placeholder="fine-grained personal access token"></div>
+
+    <div class="gh-row">
+      <label>Owner/org</label>
+      <input id="ghOwner" placeholder="your-github-username">
+    </div>
+
+    <div class="gh-row">
+      <label>Repo name</label>
+      <input id="ghRepo" placeholder="geoguessr-cheatsheet">
+    </div>
+
+    <div class="gh-row">
+      <label>Branch</label>
+      <input id="ghBranch" placeholder="main">
+    </div>
+
+    <div class="gh-row">
+      <label>Token</label>
+      <input
+        id="ghToken"
+        type="password"
+        placeholder="fine-grained personal access token"
+      >
+    </div>
+
     <div class="gh-actions">
       <button class="gh-btn" id="ghSave">Save connection</button>
       <button class="gh-btn" id="ghTest">Test connection</button>
     </div>
+
     <div class="gh-note" id="ghConnStatus"></div>
-    <div class="gh-note">Data is stored one file per country at <code>meta-atlas-data/&lt;CODE&gt;.json</code> in this repo. The token is saved only in this browser and sent only to api.github.com.</div>
+
+    <div class="gh-note">
+      Data is stored one file per country at
+      <code>meta-atlas-data/&lt;CODE&gt;.json</code> in this repo.
+      The token is saved only in this browser and sent only to api.github.com.
+    </div>
   </div>
 
   <div class="search-row">
-    <input id="search" type="text" placeholder="Search a country…" autocomplete="off">
+    <input
+      id="search"
+      type="text"
+      placeholder="Search a country…"
+      autocomplete="off"
+    >
   </div>
 
   <div class="layout">
     <div class="list-pane" id="listPane"></div>
+
     <div class="dossier-pane" id="dossierPane">
       <div class="empty-state">
         <div class="big">No pin dropped yet.</div>
-        <p>Pick a country from the list to see its driving side, bollards, plates, coverage car and other tells.</p>
+        <p>
+          Pick a country from the list to see its driving side, bollards,
+          plates, coverage car and other tells.
+        </p>
       </div>
     </div>
   </div>
 
-  <footer>Community-known visual tells, for practice purposes — always cross-check against actual rounds, since Street View coverage updates over time. Your own notes and images are saved in this browser only (nothing is uploaded).</footer>
+  <footer>
+    Community-known visual tells, for practice purposes — always cross-check
+    against actual rounds, since Street View coverage updates over time.
+    Your own notes and images are saved in this browser only (nothing is uploaded).
+  </footer>
 </div>
 
-<input type="file" id="imageFileInput" accept="image/*" multiple style="display:none;">
+<input
+  type="file"
+  id="imageFileInput"
+  accept="image/*"
+  multiple
+  style="display:none;"
+>
+
 <div class="lightbox-overlay" id="lightbox" style="display:none;">
   <div class="lightbox-close" id="lightboxClose">&times; close</div>
   <img id="lightboxImg" src="" alt="">
@@ -429,103 +562,140 @@ textarea#notesBox:focus{ border-color:#8a6a3f; }
 
 <script>
 const DATA = [
-{ name:"France", code:"FR", region:"Europe" },
-{ name:"Germany", code:"DE", region:"Europe" },
-{ name:"United Kingdom", code:"GB", region:"Europe" },
-{ name:"Spain", code:"ES", region:"Europe" },
-{ name:"Italy", code:"IT", region:"Europe" },
-{ name:"Netherlands", code:"NL", region:"Europe" },
-{ name:"Belgium", code:"BE", region:"Europe" },
-{ name:"Switzerland", code:"CH", region:"Europe" },
-{ name:"Austria", code:"AT", region:"Europe" },
-{ name:"Poland", code:"PL", region:"Europe" },
-{ name:"Czechia", code:"CZ", region:"Europe" },
-{ name:"Romania", code:"RO", region:"Europe" },
-{ name:"Sweden", code:"SE", region:"Europe" },
-{ name:"Norway", code:"NO", region:"Europe" },
-{ name:"Finland", code:"FI", region:"Europe" },
-{ name:"Russia", code:"RU", region:"Europe" },
-{ name:"Ukraine", code:"UA", region:"Europe" },
-{ name:"Estonia", code:"EE", region:"Europe" },
-{ name:"Latvia", code:"LV", region:"Europe" },
-{ name:"Lithuania", code:"LT", region:"Europe" },
-{ name:"Portugal", code:"PT", region:"Europe" },
-{ name:"Ireland", code:"IE", region:"Europe" },
-{ name:"Greece", code:"GR", region:"Europe" },
-{ name:"Iceland", code:"IS", region:"Europe" },
-{ name:"Turkey", code:"TR", region:"Europe" },
-{ name:"United States", code:"US", region:"Americas" },
-{ name:"Canada", code:"CA", region:"Americas" },
-{ name:"Mexico", code:"MX", region:"Americas" },
-{ name:"Brazil", code:"BR", region:"Americas" },
-{ name:"Argentina", code:"AR", region:"Americas" },
-{ name:"Chile", code:"CL", region:"Americas" },
-{ name:"Colombia", code:"CO", region:"Americas" },
-{ name:"Peru", code:"PE", region:"Americas" },
-{ name:"Nigeria", code:"NG", region:"Africa" },
-{ name:"Kenya", code:"KE", region:"Africa" },
-{ name:"South Africa", code:"ZA", region:"Africa" },
-{ name:"Ghana", code:"GH", region:"Africa" },
-{ name:"Tunisia", code:"TN", region:"Africa" },
-{ name:"Botswana", code:"BW", region:"Africa" },
-{ name:"Eswatini", code:"SZ", region:"Africa" },
-{ name:"Senegal", code:"SN", region:"Africa" },
-{ name:"Lesotho", code:"LS", region:"Africa" },
-{ name:"Japan", code:"JP", region:"Asia" },
-{ name:"South Korea", code:"KR", region:"Asia" },
-{ name:"Taiwan", code:"TW", region:"Asia" },
-{ name:"India", code:"IN", region:"Asia" },
-{ name:"Indonesia", code:"ID", region:"Asia" },
-{ name:"Malaysia", code:"MY", region:"Asia" },
-{ name:"Thailand", code:"TH", region:"Asia" },
-{ name:"Philippines", code:"PH", region:"Asia" },
-{ name:"Singapore", code:"SG", region:"Asia" },
-{ name:"Mongolia", code:"MN", region:"Asia" },
-{ name:"Israel", code:"IL", region:"Asia" },
-{ name:"Jordan", code:"JO", region:"Asia" },
-{ name:"United Arab Emirates", code:"AE", region:"Asia" },
-{ name:"Kyrgyzstan", code:"KG", region:"Asia" },
-{ name:"Bangladesh", code:"BD", region:"Asia" },
-{ name:"Sri Lanka", code:"LK", region:"Asia" },
-{ name:"Cambodia", code:"KH", region:"Asia" },
-{ name:"Laos", code:"LA", region:"Asia" },
-{ name:"Kazakhstan", code:"KZ", region:"Asia" },
-{ name:"Australia", code:"AU", region:"Oceania" },
-{ name:"New Zealand", code:"NZ", region:"Oceania" },
+  { name:"France", code:"FR", region:"Europe" },
+  { name:"Germany", code:"DE", region:"Europe" },
+  { name:"United Kingdom", code:"GB", region:"Europe" },
+  { name:"Spain", code:"ES", region:"Europe" },
+  { name:"Italy", code:"IT", region:"Europe" },
+  { name:"Netherlands", code:"NL", region:"Europe" },
+  { name:"Belgium", code:"BE", region:"Europe" },
+  { name:"Switzerland", code:"CH", region:"Europe" },
+  { name:"Austria", code:"AT", region:"Europe" },
+  { name:"Poland", code:"PL", region:"Europe" },
+  { name:"Czechia", code:"CZ", region:"Europe" },
+  { name:"Romania", code:"RO", region:"Europe" },
+  { name:"Sweden", code:"SE", region:"Europe" },
+  { name:"Norway", code:"NO", region:"Europe" },
+  { name:"Finland", code:"FI", region:"Europe" },
+  { name:"Russia", code:"RU", region:"Europe" },
+  { name:"Ukraine", code:"UA", region:"Europe" },
+  { name:"Estonia", code:"EE", region:"Europe" },
+  { name:"Latvia", code:"LV", region:"Europe" },
+  { name:"Lithuania", code:"LT", region:"Europe" },
+  { name:"Portugal", code:"PT", region:"Europe" },
+  { name:"Ireland", code:"IE", region:"Europe" },
+  { name:"Greece", code:"GR", region:"Europe" },
+  { name:"Iceland", code:"IS", region:"Europe" },
+  { name:"Turkey", code:"TR", region:"Europe" },
+
+  { name:"United States", code:"US", region:"Americas" },
+  { name:"Canada", code:"CA", region:"Americas" },
+  { name:"Mexico", code:"MX", region:"Americas" },
+  { name:"Brazil", code:"BR", region:"Americas" },
+  { name:"Argentina", code:"AR", region:"Americas" },
+  { name:"Chile", code:"CL", region:"Americas" },
+  { name:"Colombia", code:"CO", region:"Americas" },
+  { name:"Peru", code:"PE", region:"Americas" },
+
+  { name:"Nigeria", code:"NG", region:"Africa" },
+  { name:"Kenya", code:"KE", region:"Africa" },
+  { name:"South Africa", code:"ZA", region:"Africa" },
+  { name:"Ghana", code:"GH", region:"Africa" },
+  { name:"Tunisia", code:"TN", region:"Africa" },
+  { name:"Botswana", code:"BW", region:"Africa" },
+  { name:"Eswatini", code:"SZ", region:"Africa" },
+  { name:"Senegal", code:"SN", region:"Africa" },
+  { name:"Lesotho", code:"LS", region:"Africa" },
+
+  { name:"Japan", code:"JP", region:"Asia" },
+  { name:"South Korea", code:"KR", region:"Asia" },
+  { name:"Taiwan", code:"TW", region:"Asia" },
+  { name:"India", code:"IN", region:"Asia" },
+  { name:"Indonesia", code:"ID", region:"Asia" },
+  { name:"Malaysia", code:"MY", region:"Asia" },
+  { name:"Thailand", code:"TH", region:"Asia" },
+  { name:"Philippines", code:"PH", region:"Asia" },
+  { name:"Singapore", code:"SG", region:"Asia" },
+  { name:"Mongolia", code:"MN", region:"Asia" },
+  { name:"Israel", code:"IL", region:"Asia" },
+  { name:"Jordan", code:"JO", region:"Asia" },
+  { name:"United Arab Emirates", code:"AE", region:"Asia" },
+  { name:"Kyrgyzstan", code:"KG", region:"Asia" },
+  { name:"Bangladesh", code:"BD", region:"Asia" },
+  { name:"Sri Lanka", code:"LK", region:"Asia" },
+  { name:"Cambodia", code:"KH", region:"Asia" },
+  { name:"Laos", code:"LA", region:"Asia" },
+  { name:"Kazakhstan", code:"KZ", region:"Asia" },
+
+  { name:"Australia", code:"AU", region:"Oceania" },
+  { name:"New Zealand", code:"NZ", region:"Oceania" }
 ];
 
-const regionsOrder = ["Europe","Americas","Africa","Asia","Oceania"];
+const regionsOrder = [
+  "Europe",
+  "Americas",
+  "Africa",
+  "Asia",
+  "Oceania"
+];
 
 function flagEmoji(code){
-  return code.toUpperCase().replace(/./g, c => String.fromCodePoint(127397 + c.charCodeAt(0)));
+  return code.toUpperCase().replace(
+    /./g,
+    c => String.fromCodePoint(127397 + c.charCodeAt(0))
+  );
 }
 
 const listPane = document.getElementById('listPane');
 const dossierPane = document.getElementById('dossierPane');
 const searchInput = document.getElementById('search');
+
 document.getElementById('count').textContent = DATA.length;
 
 let activeName = null;
+let dossierRenderId = 0;
+
+/* ---- Country list ---- */
 
 function renderList(filter=""){
   listPane.innerHTML = "";
+
   const f = filter.trim().toLowerCase();
   let anyMatch = false;
 
   regionsOrder.forEach(region => {
-    const items = DATA.filter(d => d.region === region && d.name.toLowerCase().includes(f));
+    const items = DATA.filter(
+      d => d.region === region &&
+           d.name.toLowerCase().includes(f)
+    );
+
     if(items.length === 0) return;
+
     anyMatch = true;
+
     const label = document.createElement('div');
     label.className = 'region-label';
     label.textContent = region.toUpperCase();
+
     listPane.appendChild(label);
 
     items.forEach(country => {
       const row = document.createElement('div');
-      row.className = 'country-row' + (country.name === activeName ? ' active' : '');
-      row.innerHTML = `<span class="flag">${flagEmoji(country.code)}</span><span>${country.name}</span>`;
-      row.addEventListener('click', () => selectCountry(country.name));
+
+      row.className =
+        'country-row' +
+        (country.name === activeName ? ' active' : '');
+
+      row.innerHTML = `
+        <span class="flag">${flagEmoji(country.code)}</span>
+        <span>${country.name}</span>
+      `;
+
+      row.addEventListener(
+        'click',
+        () => selectCountry(country.name)
+      );
+
       listPane.appendChild(row);
     });
   });
@@ -544,49 +714,73 @@ function selectCountry(name){
   renderDossier(name);
 }
 
-/* ---- User data: notes in localStorage (tiny), images in IndexedDB (room for hundreds of MB) ---- */
+/* ---- User data: notes in localStorage, images in IndexedDB ---- */
+
 const STORAGE_PREFIX = "metaAtlas_notes_";
 const DB_NAME = "metaAtlasImages";
 const DB_STORE = "images";
+
 let notesSaveTimer = null;
 let dbPromise = null;
 
 function openImageDB(){
   if(dbPromise) return dbPromise;
+
   dbPromise = new Promise((resolve, reject) => {
     const req = indexedDB.open(DB_NAME, 1);
+
     req.onupgradeneeded = () => {
       const db = req.result;
+
       if(!db.objectStoreNames.contains(DB_STORE)){
-        db.createObjectStore(DB_STORE, { keyPath: "id", autoIncrement: true });
+        db.createObjectStore(
+          DB_STORE,
+          {
+            keyPath: "id",
+            autoIncrement: true
+          }
+        );
       }
     };
+
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
   });
+
   return dbPromise;
 }
 
 async function getImages(code){
   const db = await openImageDB();
+
   return new Promise((resolve, reject) => {
     const tx = db.transaction(DB_STORE, "readonly");
-    const idx = tx.objectStore(DB_STORE).index ? null : null;
     const store = tx.objectStore(DB_STORE);
     const req = store.getAll();
+
     req.onsuccess = () => {
-      const all = req.result.filter(r => r.code === code).sort((a,b) => a.id - b.id);
+      const all = req.result
+        .filter(r => r.code === code)
+        .sort((a,b) => a.id - b.id);
+
       resolve(all);
     };
+
     req.onerror = () => reject(req.error);
   });
 }
 
 async function addImage(code, dataURL){
   const db = await openImageDB();
+
   return new Promise((resolve, reject) => {
     const tx = db.transaction(DB_STORE, "readwrite");
-    tx.objectStore(DB_STORE).add({ code, src: dataURL });
+
+    tx.objectStore(DB_STORE).add({
+      code,
+      src: dataURL
+    });
+
     tx.oncomplete = () => resolve(true);
     tx.onerror = () => reject(tx.error);
   });
@@ -594,9 +788,12 @@ async function addImage(code, dataURL){
 
 async function deleteImage(id){
   const db = await openImageDB();
+
   return new Promise((resolve, reject) => {
     const tx = db.transaction(DB_STORE, "readwrite");
+
     tx.objectStore(DB_STORE).delete(id);
+
     tx.oncomplete = () => resolve(true);
     tx.onerror = () => reject(tx.error);
   });
@@ -604,269 +801,166 @@ async function deleteImage(id){
 
 async function replaceAllImages(code, dataURLs){
   const existing = await getImages(code);
-  for(const rec of existing){ await deleteImage(rec.id); }
-  for(const src of dataURLs){ await addImage(code, src); }
+
+  for(const rec of existing){
+    await deleteImage(rec.id);
+  }
+
+  for(const src of dataURLs){
+    await addImage(code, src);
+  }
 }
 
-// Downscale + re-encode an image file so it takes far less storage space.
-function compressImage(file, maxDim = 1600, quality = 0.82){
+/* ---- Image compression ---- */
+
+function compressImage(
+  file,
+  maxDim = 1600,
+  quality = 0.82
+){
   return new Promise((resolve, reject) => {
     const img = new Image();
     const reader = new FileReader();
-    reader.onload = () => { img.src = reader.result; };
+
+    reader.onload = () => {
+      img.src = reader.result;
+    };
+
     reader.onerror = reject;
+
     img.onload = () => {
-      let { width, height } = img;
+      let {
+        width,
+        height
+      } = img;
+
       if(width > maxDim || height > maxDim){
-        const scale = maxDim / Math.max(width, height);
+        const scale =
+          maxDim / Math.max(width, height);
+
         width = Math.round(width * scale);
         height = Math.round(height * scale);
       }
-      const canvas = document.createElement('canvas');
+
+      const canvas =
+        document.createElement('canvas');
+
       canvas.width = width;
       canvas.height = height;
-      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-      resolve(canvas.toDataURL('image/jpeg', quality));
+
+      const ctx = canvas.getContext('2d');
+
+      if(!ctx){
+        reject(new Error('Could not create image canvas.'));
+        return;
+      }
+
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        width,
+        height
+      );
+
+      resolve(
+        canvas.toDataURL(
+          'image/jpeg',
+          quality
+        )
+      );
     };
+
     img.onerror = reject;
+
     reader.readAsDataURL(file);
   });
 }
 
+/* ---- Notes ---- */
+
 function loadNotes(code){
-  return localStorage.getItem(STORAGE_PREFIX + code) || "";
+  return localStorage.getItem(
+    STORAGE_PREFIX + code
+  ) || "";
 }
+
 function saveNotes(code, text){
   try{
-    localStorage.setItem(STORAGE_PREFIX + code, text);
+    localStorage.setItem(
+      STORAGE_PREFIX + code,
+      text
+    );
+
     return true;
   }catch(e){
-    console.error("Could not save notes:", e);
-    return false;
-  }
-}
-
-function isGhConnected(){
-  const { owner, repo, token } = getGhSettings();
-  return !!(owner && repo && token);
-}
-
-async function silentPullCountry(code){
-  const { owner, repo, branch, token } = getGhSettings();
-  if(!owner || !repo || !token) return false;
-  try{
-    const path = `${GH_PATH_PREFIX}${code}.json`;
-    const file = await ghGetFile(owner, repo, branch || 'main', path, token);
-    if(!file) return false;
-    const data = JSON.parse(base64ToUtf8(file.content.replace(/\n/g, '')));
-    saveNotes(code, data.notes || '');
-    await replaceAllImages(code, data.images || []);
-    return true;
-  }catch(err){
-    console.error('Auto-pull failed:', err);
-    return false;
-  }
-}
-
-const pushQueues = {}; // one queue per country code, so pushes never overlap for the same country
-
-async function silentPushCountry(code, name){
-  // Chain onto any push already in flight for this country, so two rapid
-  // edits (e.g. typing a note right after adding an image) never race
-  // each other and hit a version conflict.
-  const prev = pushQueues[code] || Promise.resolve();
-  const run = prev.then(() => pushCountryOnce(code, name));
-  pushQueues[code] = run.catch(() => {}); // keep the chain alive even if this one failed
-  return run;
-}
-
-function delay(ms){ return new Promise(r => setTimeout(r, ms)); }
-
-async function pushCountryOnce(code, name, attempt = 1){
-  const { owner, repo, branch, token } = getGhSettings();
-  if(!owner || !repo || !token) return { ok:false, error:'not connected' };
-  try{
-    const notes = loadNotes(code);
-    const images = (await getImages(code)).map(r => r.src);
-    const path = `${GH_PATH_PREFIX}${code}.json`;
-    const existing = await ghGetFile(owner, repo, branch || 'main', path, token);
-    console.log(`[meta-atlas sync] attempt ${attempt} for ${code}: existing sha =`, existing ? existing.sha : '(none — will create new file)');
-    await ghPutFile(owner, repo, branch || 'main', path, token,
-      { country: name, code, notes, images },
-      existing ? existing.sha : null,
-      `Update ${name} notes/images`
+    console.error(
+      "Could not save notes:",
+      e
     );
-    return { ok:true };
-  }catch(err){
-    const msg = (err && err.message ? err.message : String(err));
-    console.error(`[meta-atlas sync] attempt ${attempt} failed for ${code}:`, msg);
-    // 409 = the file changed on GitHub between our read and write (stale sha).
-    // Wait briefly (letting GitHub's backend catch up), then re-fetch and retry.
-    if(msg.includes('(409)') && attempt < 5){
-      await delay(400 * attempt);
-      return pushCountryOnce(code, name, attempt + 1);
-    }
-    return { ok:false, error: msg.slice(0, 300) };
+
+    return false;
   }
 }
 
-async function renderDossier(name){
-  const c = DATA.find(d => d.name === name);
-  if(!c) return;
-  const connected = isGhConnected();
+/* ---- GitHub settings ---- */
 
-  // If connected, pull the latest saved version for this country before showing it,
-  // so opening a country always reflects what's in the repo.
-  if(connected){
-    dossierPane.innerHTML = `
-      <div class="dossier-head">
-        <div class="dossier-flag">${flagEmoji(c.code)}</div>
-        <div class="dossier-name">${c.name}</div>
-      </div>
-      <div class="cloud-status" id="cloudStatus">☁ checking GitHub…</div>
-    `;
-    await silentPullCountry(c.code);
-  }
+const GH_SETTINGS_KEY =
+  'metaAtlas_ghSettings';
 
-  const notes = loadNotes(c.code);
-
-  dossierPane.innerHTML = `
-    <div class="dossier-head">
-      <div class="dossier-flag">${flagEmoji(c.code)}</div>
-      <div class="dossier-name">${c.name}</div>
-    </div>
-    <div class="cloud-status" id="cloudStatus">${connected ? '☁ auto-sync on — synced' : '☁ not connected — set up GitHub backup above to auto-save here'}</div>
-
-    <div class="user-section" style="margin-top:14px; border-top:none; padding-top:0;">
-      <div class="k">MY NOTES</div>
-      <textarea id="notesBox" placeholder="Type your own notes for ${c.name} here — they save automatically…">${notes.replace(/</g,'&lt;')}</textarea>
-      <div class="notes-status" id="notesStatus"></div>
-    </div>
-
-    <div class="user-section">
-      <div class="k">MY IMAGES</div>
-      <div class="image-grid" id="imageGrid"></div>
-    </div>
-  `;
-
-  await renderImageGrid(c.code);
-
-  const notesBox = document.getElementById('notesBox');
-  const notesStatus = document.getElementById('notesStatus');
-  const cloudStatus = document.getElementById('cloudStatus');
-  notesBox.addEventListener('input', () => {
-    clearTimeout(notesSaveTimer);
-    notesStatus.textContent = "saving…";
-    notesSaveTimer = setTimeout(async () => {
-      const ok = saveNotes(c.code, notesBox.value);
-      notesStatus.textContent = ok ? "saved" : "could not save";
-      setTimeout(() => { if(notesStatus.textContent === "saved") notesStatus.textContent = ""; }, 1200);
-      if(ok && isGhConnected()){
-        cloudStatus.textContent = "☁ syncing…";
-        const result = await silentPushCountry(c.code, c.name);
-        cloudStatus.textContent = result.ok ? "☁ auto-sync on — synced" : `☁ sync failed: ${result.error}`;
-      }
-    }, 500);
-  });
-}
-
-async function autoPushAfterImageChange(code){
-  const country = DATA.find(d => d.code === code);
-  const cloudStatus = document.getElementById('cloudStatus');
-  if(!isGhConnected()) return;
-  if(cloudStatus) cloudStatus.textContent = "☁ syncing…";
-  const result = await silentPushCountry(code, country ? country.name : code);
-  if(cloudStatus) cloudStatus.textContent = result.ok ? "☁ auto-sync on — synced" : `☁ sync failed: ${result.error}`;
-}
-
-async function renderImageGrid(code){
-  const grid = document.getElementById('imageGrid');
-  if(!grid) return;
-  grid.innerHTML = `<div class="add-image-tile" style="opacity:0.5;">…</div>`;
-
-  const images = await getImages(code);
-  grid.innerHTML = "";
-
-  images.forEach(rec => {
-    const tile = document.createElement('div');
-    tile.className = 'image-tile';
-    tile.innerHTML = `<img src="${rec.src}" alt=""><button class="rm" title="Remove">&times;</button>`;
-    tile.querySelector('img').addEventListener('click', () => openLightbox(rec.src));
-    tile.querySelector('.rm').addEventListener('click', async (e) => {
-      e.stopPropagation();
-      await deleteImage(rec.id);
-      await renderImageGrid(code);
-      autoPushAfterImageChange(code);
-    });
-    grid.appendChild(tile);
-  });
-
-  const addTile = document.createElement('div');
-  addTile.className = 'add-image-tile';
-  addTile.innerHTML = `+<span>ADD IMAGE</span>`;
-  addTile.addEventListener('click', () => {
-    imageFileInput.dataset.code = code;
-    imageFileInput.click();
-  });
-  grid.appendChild(addTile);
-}
-
-const imageFileInput = document.getElementById('imageFileInput');
-imageFileInput.addEventListener('change', async (e) => {
-  const code = imageFileInput.dataset.code;
-  const files = Array.from(e.target.files || []);
-  imageFileInput.value = "";
-  if(files.length === 0) return;
-
-  let failed = 0;
-  for(const file of files){
-    try{
-      const compressed = await compressImage(file);
-      await addImage(code, compressed);
-    }catch(err){
-      console.error("Image save failed:", err);
-      failed++;
-    }
-  }
-  await renderImageGrid(code);
-  autoPushAfterImageChange(code);
-  if(failed > 0){
-    alert(`${failed} image(s) couldn't be saved. Your browser's storage may be full or blocking this — try removing a few older images.`);
-  }
-});
-
-function openLightbox(src){
-  document.getElementById('lightboxImg').src = src;
-  document.getElementById('lightbox').style.display = 'flex';
-}
-function closeLightbox(){
-  document.getElementById('lightbox').style.display = 'none';
-  document.getElementById('lightboxImg').src = '';
-}
-document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-document.getElementById('lightbox').addEventListener('click', (e) => {
-  if(e.target.id === 'lightbox') closeLightbox();
-});
-
-/* ---- GitHub backup: one JSON file per country in a repo you control ---- */
-const GH_SETTINGS_KEY = 'metaAtlas_ghSettings';
-const GH_PATH_PREFIX = 'meta-atlas-data/';
+const GH_PATH_PREFIX =
+  'meta-atlas-data/';
 
 function getGhSettings(){
   try{
-    return JSON.parse(localStorage.getItem(GH_SETTINGS_KEY)) || {};
-  }catch(e){ return {}; }
-}
-function saveGhSettings(s){
-  localStorage.setItem(GH_SETTINGS_KEY, JSON.stringify(s));
+    return JSON.parse(
+      localStorage.getItem(GH_SETTINGS_KEY)
+    ) || {};
+  }catch(e){
+    return {};
+  }
 }
 
+function saveGhSettings(s){
+  localStorage.setItem(
+    GH_SETTINGS_KEY,
+    JSON.stringify(s)
+  );
+}
+
+function isGhConnected(){
+  const {
+    owner,
+    repo,
+    token
+  } = getGhSettings();
+
+  return !!(
+    owner &&
+    repo &&
+    token
+  );
+}
+
+/* ---- Base64 helpers ---- */
+
 function utf8ToBase64(str){
-  return btoa(unescape(encodeURIComponent(str)));
+  return btoa(
+    unescape(
+      encodeURIComponent(str)
+    )
+  );
 }
+
 function base64ToUtf8(b64){
-  return decodeURIComponent(escape(atob(b64)));
+  return decodeURIComponent(
+    escape(
+      atob(b64)
+    )
+  );
 }
+
+/* ---- GitHub API ---- */
 
 function ghHeaders(token){
   return {
@@ -878,106 +972,1043 @@ function ghHeaders(token){
 async function extractGhErrorMessage(res){
   try{
     const data = await res.json();
-    return data.message || res.statusText || `HTTP ${res.status}`;
+
+    return (
+      data.message ||
+      res.statusText ||
+      `HTTP ${res.status}`
+    );
   }catch(e){
     return `HTTP ${res.status} ${res.statusText}`;
   }
 }
 
-async function ghGetFile(owner, repo, branch, path, token){
-  // cache: 'no-store' + a timestamp param stop the browser from ever serving
-  // a stale cached response here — we always need the file's current sha.
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}&_=${Date.now()}`;
-  const res = await fetch(url, { headers: { ...ghHeaders(token), 'Cache-Control': 'no-cache' }, cache: 'no-store' });
-  if(res.status === 404) return null;
-  if(!res.ok) throw new Error(`(${res.status}) ${await extractGhErrorMessage(res)}`);
-  return res.json(); // { sha, content (base64, may have newlines), ... }
-}
+/*
+ * IMPORTANT:
+ * Do not send Cache-Control as a request header here.
+ *
+ * cache: 'no-store' is a browser fetch option and the timestamp
+ * parameter provides an additional cache-busting mechanism.
+ *
+ * The previous Cache-Control request header could trigger a CORS
+ * preflight that GitHub would reject.
+ */
+async function ghGetFile(
+  owner,
+  repo,
+  branch,
+  path,
+  token
+){
+  const url =
+    `https://api.github.com/repos/${owner}/${repo}/contents/${path}` +
+    `?ref=${encodeURIComponent(branch)}&_=${Date.now()}`;
 
-async function ghPutFile(owner, repo, branch, path, token, contentObj, existingSha, message){
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-  const body = {
-    message,
-    content: utf8ToBase64(JSON.stringify(contentObj, null, 2)),
-    branch
-  };
-  if(existingSha) body.sha = existingSha;
   const res = await fetch(url, {
-    method: 'PUT',
-    headers: { ...ghHeaders(token), 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
+    headers: ghHeaders(token),
+    cache: 'no-store'
   });
-  if(!res.ok) throw new Error(`(${res.status}) ${await extractGhErrorMessage(res)}`);
+
+  if(res.status === 404){
+    return null;
+  }
+
+  if(!res.ok){
+    throw new Error(
+      `(${res.status}) ${await extractGhErrorMessage(res)}`
+    );
+  }
+
   return res.json();
 }
 
-// Settings panel wiring
-const ghPanel = document.getElementById('ghPanel');
-document.getElementById('ghToggle').addEventListener('click', () => ghPanel.classList.toggle('open'));
+async function ghPutFile(
+  owner,
+  repo,
+  branch,
+  path,
+  token,
+  contentObj,
+  existingSha,
+  message
+){
+  const url =
+    `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
-(function initGhForm(){
-  const s = getGhSettings();
-  document.getElementById('ghOwner').value = s.owner || '';
-  document.getElementById('ghRepo').value = s.repo || '';
-  document.getElementById('ghBranch').value = s.branch || 'main';
-  document.getElementById('ghToken').value = s.token || '';
-})();
-
-document.getElementById('ghSave').addEventListener('click', () => {
-  const s = {
-    owner: document.getElementById('ghOwner').value.trim(),
-    repo: document.getElementById('ghRepo').value.trim(),
-    branch: document.getElementById('ghBranch').value.trim() || 'main',
-    token: document.getElementById('ghToken').value.trim()
+  const body = {
+    message,
+    content: utf8ToBase64(
+      JSON.stringify(contentObj, null, 2)
+    ),
+    branch
   };
-  saveGhSettings(s);
-  document.getElementById('ghConnStatus').textContent = 'saved.';
-  setTimeout(() => { document.getElementById('ghConnStatus').textContent = ''; }, 1500);
-});
 
-document.getElementById('ghTest').addEventListener('click', async () => {
-  const conn = document.getElementById('ghConnStatus');
-  const { owner, repo, branch, token } = getGhSettings();
-  if(!owner || !repo || !token){ conn.textContent = 'fill in owner, repo and token first.'; return; }
-  conn.textContent = 'testing…';
-  try{
-    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers: ghHeaders(token) });
-    if(res.ok){
-      conn.textContent = `connected to ${owner}/${repo} ✓`;
-    }else{
-      conn.textContent = `could not connect (${res.status}) — check owner/repo/token.`;
-    }
-  }catch(e){
-    conn.textContent = 'connection error — check your internet connection.';
+  if(existingSha){
+    body.sha = existingSha;
   }
-});
 
-// One-time migration: move any data saved under the old scheme
-// (localStorage-only, prefix "metaAtlas_") into the new notes/IndexedDB split.
-async function migrateOldData(){
-  if(localStorage.getItem('metaAtlas_migrated_v2')) return;
-  const oldKeys = Object.keys(localStorage).filter(k => k.startsWith('metaAtlas_') && !k.startsWith('metaAtlas_notes_') && k !== 'metaAtlas_migrated_v2');
-  for(const key of oldKeys){
-    const code = key.replace('metaAtlas_', '');
-    try{
-      const parsed = JSON.parse(localStorage.getItem(key));
-      if(parsed.notes) saveNotes(code, parsed.notes);
-      if(Array.isArray(parsed.images)){
-        for(const src of parsed.images){
-          try{ await addImage(code, src); }catch(e){ /* skip ones that fail */ }
-        }
-      }
-      localStorage.removeItem(key);
-    }catch(e){ /* leave malformed entries alone */ }
+  const res = await fetch(url, {
+    method: 'PUT',
+
+    headers: {
+      ...ghHeaders(token),
+      'Content-Type': 'application/json'
+    },
+
+    body: JSON.stringify(body)
+  });
+
+  if(!res.ok){
+    throw new Error(
+      `(${res.status}) ${await extractGhErrorMessage(res)}`
+    );
   }
-  localStorage.setItem('metaAtlas_migrated_v2', '1');
+
+  return res.json();
 }
 
-migrateOldData().then(() => {
-  if(activeName) renderDossier(activeName);
-});
+/* ---- Pull country ---- */
 
-searchInput.addEventListener('input', () => renderList(searchInput.value));
+async function silentPullCountry(code){
+  const {
+    owner,
+    repo,
+    branch,
+    token
+  } = getGhSettings();
+
+  if(!owner || !repo || !token){
+    return false;
+  }
+
+  try{
+    const path =
+      `${GH_PATH_PREFIX}${code}.json`;
+
+    const file = await ghGetFile(
+      owner,
+      repo,
+      branch || 'main',
+      path,
+      token
+    );
+
+    if(!file){
+      return false;
+    }
+
+    const data = JSON.parse(
+      base64ToUtf8(
+        file.content.replace(/\n/g, '')
+      )
+    );
+
+    saveNotes(
+      code,
+      data.notes || ''
+    );
+
+    await replaceAllImages(
+      code,
+      data.images || []
+    );
+
+    return true;
+  }catch(err){
+    console.error(
+      'Auto-pull failed:',
+      err
+    );
+
+    return false;
+  }
+}
+
+/* ---- Push queue ---- */
+
+const pushQueues = {};
+
+/*
+ * Each country gets its own promise chain.
+ * This prevents rapid edits from causing SHA conflicts.
+ */
+async function silentPushCountry(
+  code,
+  name
+){
+  const prev =
+    pushQueues[code] ||
+    Promise.resolve();
+
+  const run =
+    prev.then(
+      () => pushCountryOnce(code, name)
+    );
+
+  pushQueues[code] =
+    run.catch(() => {});
+
+  return run;
+}
+
+function delay(ms){
+  return new Promise(
+    r => setTimeout(r, ms)
+  );
+}
+
+async function pushCountryOnce(
+  code,
+  name,
+  attempt = 1
+){
+  const {
+    owner,
+    repo,
+    branch,
+    token
+  } = getGhSettings();
+
+  if(!owner || !repo || !token){
+    return {
+      ok:false,
+      error:'not connected'
+    };
+  }
+
+  try{
+    const notes =
+      loadNotes(code);
+
+    const images =
+      (await getImages(code))
+        .map(r => r.src);
+
+    const path =
+      `${GH_PATH_PREFIX}${code}.json`;
+
+    const existing =
+      await ghGetFile(
+        owner,
+        repo,
+        branch || 'main',
+        path,
+        token
+      );
+
+    console.log(
+      `[meta-atlas sync] attempt ${attempt} for ${code}: existing sha =`,
+      existing
+        ? existing.sha
+        : '(none — will create new file)'
+    );
+
+    await ghPutFile(
+      owner,
+      repo,
+      branch || 'main',
+      path,
+      token,
+      {
+        country: name,
+        code,
+        notes,
+        images
+      },
+      existing
+        ? existing.sha
+        : null,
+      `Update ${name} notes/images`
+    );
+
+    return {
+      ok:true
+    };
+
+  }catch(err){
+    const msg =
+      (
+        err &&
+        err.message
+      )
+        ? err.message
+        : String(err);
+
+    console.error(
+      `[meta-atlas sync] attempt ${attempt} failed for ${code}:`,
+      msg
+    );
+
+    /*
+     * 409 means the GitHub file changed between our GET and PUT.
+     * Re-fetch the SHA and retry.
+     */
+    if(
+      msg.includes('(409)') &&
+      attempt < 5
+    ){
+      await delay(
+        400 * attempt
+      );
+
+      return pushCountryOnce(
+        code,
+        name,
+        attempt + 1
+      );
+    }
+
+    return {
+      ok:false,
+      error:msg.slice(0, 300)
+    };
+  }
+}
+
+/* ---- Dossier ---- */
+
+async function renderDossier(name){
+  /*
+   * Every render gets a unique ID.
+   * If the user changes countries while a GitHub request is
+   * still running, the older request is prevented from
+   * overwriting the newer dossier.
+   */
+  const renderId =
+    ++dossierRenderId;
+
+  const c =
+    DATA.find(
+      d => d.name === name
+    );
+
+  if(!c){
+    return;
+  }
+
+  const connected =
+    isGhConnected();
+
+  if(connected){
+    dossierPane.innerHTML = `
+      <div class="dossier-head">
+        <div class="dossier-flag">
+          ${flagEmoji(c.code)}
+        </div>
+
+        <div class="dossier-name">
+          ${c.name}
+        </div>
+      </div>
+
+      <div
+        class="cloud-status"
+        id="cloudStatus"
+      >
+        ☁ checking GitHub…
+      </div>
+    `;
+
+    await silentPullCountry(
+      c.code
+    );
+
+    /*
+     * Stop if the user has selected another
+     * country while GitHub was loading.
+     */
+    if(renderId !== dossierRenderId){
+      return;
+    }
+  }
+
+  const notes =
+    loadNotes(c.code);
+
+  dossierPane.innerHTML = `
+    <div class="dossier-head">
+      <div class="dossier-flag">
+        ${flagEmoji(c.code)}
+      </div>
+
+      <div class="dossier-name">
+        ${c.name}
+      </div>
+    </div>
+
+    <div
+      class="cloud-status"
+      id="cloudStatus"
+    >
+      ${
+        connected
+          ? '☁ auto-sync on — synced'
+          : '☁ not connected — set up GitHub backup above to auto-save here'
+      }
+    </div>
+
+    <div
+      class="user-section"
+      style="margin-top:14px; border-top:none; padding-top:0;"
+    >
+      <div class="k">
+        MY NOTES
+      </div>
+
+      <textarea
+        id="notesBox"
+        placeholder="Type your own notes for ${c.name} here — they save automatically…"
+      >${notes.replace(/</g,'&lt;')}</textarea>
+
+      <div
+        class="notes-status"
+        id="notesStatus"
+      ></div>
+    </div>
+
+    <div class="user-section">
+      <div class="k">
+        MY IMAGES
+      </div>
+
+      <div
+        class="image-grid"
+        id="imageGrid"
+      ></div>
+    </div>
+  `;
+
+  await renderImageGrid(
+    c.code
+  );
+
+  /*
+   * renderImageGrid is asynchronous too.
+   * Don't attach listeners to an old dossier.
+   */
+  if(renderId !== dossierRenderId){
+    return;
+  }
+
+  const notesBox =
+    document.getElementById('notesBox');
+
+  const notesStatus =
+    document.getElementById('notesStatus');
+
+  const cloudStatus =
+    document.getElementById('cloudStatus');
+
+  if(!notesBox){
+    return;
+  }
+
+  notesBox.addEventListener(
+    'input',
+    () => {
+      clearTimeout(
+        notesSaveTimer
+      );
+
+      notesStatus.textContent =
+        "saving…";
+
+      notesSaveTimer =
+        setTimeout(
+          async () => {
+            const ok =
+              saveNotes(
+                c.code,
+                notesBox.value
+              );
+
+            notesStatus.textContent =
+              ok
+                ? "saved"
+                : "could not save";
+
+            setTimeout(
+              () => {
+                if(
+                  notesStatus.textContent ===
+                  "saved"
+                ){
+                  notesStatus.textContent =
+                    "";
+                }
+              },
+              1200
+            );
+
+            if(
+              ok &&
+              isGhConnected()
+            ){
+              cloudStatus.textContent =
+                "☁ syncing…";
+
+              const result =
+                await silentPushCountry(
+                  c.code,
+                  c.name
+                );
+
+              /*
+               * Don't update a cloud-status element
+               * belonging to a different country.
+               */
+              if(
+                renderId !== dossierRenderId
+              ){
+                return;
+              }
+
+              cloudStatus.textContent =
+                result.ok
+                  ? "☁ auto-sync on — synced"
+                  : `☁ sync failed: ${result.error}`;
+            }
+          },
+          500
+        );
+    }
+  );
+}
+
+/* ---- Image auto-push ---- */
+
+async function autoPushAfterImageChange(
+  code
+){
+  const country =
+    DATA.find(
+      d => d.code === code
+    );
+
+  const cloudStatus =
+    document.getElementById(
+      'cloudStatus'
+    );
+
+  if(!isGhConnected()){
+    return;
+  }
+
+  if(cloudStatus){
+    cloudStatus.textContent =
+      "☁ syncing…";
+  }
+
+  const result =
+    await silentPushCountry(
+      code,
+      country
+        ? country.name
+        : code
+    );
+
+  /*
+   * Only update the visible status if
+   * the currently displayed country is
+   * still the same country.
+   */
+  if(
+    activeName ===
+    (country ? country.name : null)
+  ){
+    const currentCloudStatus =
+      document.getElementById(
+        'cloudStatus'
+      );
+
+    if(currentCloudStatus){
+      currentCloudStatus.textContent =
+        result.ok
+          ? "☁ auto-sync on — synced"
+          : `☁ sync failed: ${result.error}`;
+    }
+  }
+}
+
+/* ---- Image grid ---- */
+
+async function renderImageGrid(
+  code
+){
+  const grid =
+    document.getElementById(
+      'imageGrid'
+    );
+
+  if(!grid){
+    return;
+  }
+
+  grid.innerHTML =
+    `<div class="add-image-tile" style="opacity:0.5;">…</div>`;
+
+  const images =
+    await getImages(code);
+
+  /*
+   * The user may have changed countries
+   * while IndexedDB was loading.
+   */
+  if(
+    !document.getElementById(
+      'imageGrid'
+    )
+  ){
+    return;
+  }
+
+  grid.innerHTML = "";
+
+  images.forEach(rec => {
+    const tile =
+      document.createElement('div');
+
+    tile.className =
+      'image-tile';
+
+    const img =
+      document.createElement('img');
+
+    img.src = rec.src;
+    img.alt = "";
+
+    const removeButton =
+      document.createElement('button');
+
+    removeButton.className =
+      'rm';
+
+    removeButton.title =
+      'Remove';
+
+    removeButton.type =
+      'button';
+
+    removeButton.innerHTML =
+      '&times;';
+
+    tile.appendChild(img);
+    tile.appendChild(removeButton);
+
+    img.addEventListener(
+      'click',
+      () => openLightbox(rec.src)
+    );
+
+    removeButton.addEventListener(
+      'click',
+      async e => {
+        e.stopPropagation();
+
+        await deleteImage(
+          rec.id
+        );
+
+        await renderImageGrid(
+          code
+        );
+
+        autoPushAfterImageChange(
+          code
+        );
+      }
+    );
+
+    grid.appendChild(tile);
+  });
+
+  const addTile =
+    document.createElement('div');
+
+  addTile.className =
+    'add-image-tile';
+
+  addTile.innerHTML =
+    `+<span>ADD IMAGE</span>`;
+
+  addTile.addEventListener(
+    'click',
+    () => {
+      imageFileInput.dataset.code =
+        code;
+
+      imageFileInput.click();
+    }
+  );
+
+  grid.appendChild(
+    addTile
+  );
+}
+
+/* ---- Image file input ---- */
+
+const imageFileInput =
+  document.getElementById(
+    'imageFileInput'
+  );
+
+imageFileInput.addEventListener(
+  'change',
+  async e => {
+    const code =
+      imageFileInput.dataset.code;
+
+    const files =
+      Array.from(
+        e.target.files || []
+      );
+
+    imageFileInput.value = "";
+
+    if(files.length === 0){
+      return;
+    }
+
+    let failed = 0;
+
+    for(const file of files){
+      try{
+        const compressed =
+          await compressImage(
+            file
+          );
+
+        await addImage(
+          code,
+          compressed
+        );
+
+      }catch(err){
+        console.error(
+          "Image save failed:",
+          err
+        );
+
+        failed++;
+      }
+    }
+
+    await renderImageGrid(
+      code
+    );
+
+    autoPushAfterImageChange(
+      code
+    );
+
+    if(failed > 0){
+      alert(
+        `${failed} image(s) couldn't be saved. ` +
+        `Your browser's storage may be full or blocking this — ` +
+        `try removing a few older images.`
+      );
+    }
+  }
+);
+
+/* ---- Lightbox ---- */
+
+function openLightbox(src){
+  document.getElementById(
+    'lightboxImg'
+  ).src = src;
+
+  document.getElementById(
+    'lightbox'
+  ).style.display = 'flex';
+}
+
+function closeLightbox(){
+  document.getElementById(
+    'lightbox'
+  ).style.display = 'none';
+
+  document.getElementById(
+    'lightboxImg'
+  ).src = '';
+}
+
+document.getElementById(
+  'lightboxClose'
+).addEventListener(
+  'click',
+  closeLightbox
+);
+
+document.getElementById(
+  'lightbox'
+).addEventListener(
+  'click',
+  e => {
+    if(
+      e.target.id ===
+      'lightbox'
+    ){
+      closeLightbox();
+    }
+  }
+);
+
+/* ---- GitHub settings panel ---- */
+
+const ghPanel =
+  document.getElementById(
+    'ghPanel'
+  );
+
+document.getElementById(
+  'ghToggle'
+).addEventListener(
+  'click',
+  () => {
+    ghPanel.classList.toggle(
+      'open'
+    );
+  }
+);
+
+/* ---- Initialize GitHub form ---- */
+
+(function initGhForm(){
+  const s =
+    getGhSettings();
+
+  document.getElementById(
+    'ghOwner'
+  ).value =
+    s.owner || '';
+
+  document.getElementById(
+    'ghRepo'
+  ).value =
+    s.repo || '';
+
+  document.getElementById(
+    'ghBranch'
+  ).value =
+    s.branch || 'main';
+
+  document.getElementById(
+    'ghToken'
+  ).value =
+    s.token || '';
+})();
+
+/* ---- Save GitHub settings ---- */
+
+document.getElementById(
+  'ghSave'
+).addEventListener(
+  'click',
+  () => {
+    const s = {
+      owner:
+        document.getElementById(
+          'ghOwner'
+        ).value.trim(),
+
+      repo:
+        document.getElementById(
+          'ghRepo'
+        ).value.trim(),
+
+      branch:
+        document.getElementById(
+          'ghBranch'
+        ).value.trim() ||
+        'main',
+
+      token:
+        document.getElementById(
+          'ghToken'
+        ).value.trim()
+    };
+
+    saveGhSettings(s);
+
+    document.getElementById(
+      'ghConnStatus'
+    ).textContent =
+      'saved.';
+
+    setTimeout(
+      () => {
+        document.getElementById(
+          'ghConnStatus'
+        ).textContent =
+          '';
+      },
+      1500
+    );
+  }
+);
+
+/* ---- Test GitHub connection ---- */
+
+document.getElementById(
+  'ghTest'
+).addEventListener(
+  'click',
+  async () => {
+    const conn =
+      document.getElementById(
+        'ghConnStatus'
+      );
+
+    const {
+      owner,
+      repo,
+      branch,
+      token
+    } = getGhSettings();
+
+    if(
+      !owner ||
+      !repo ||
+      !token
+    ){
+      conn.textContent =
+        'fill in owner, repo and token first.';
+
+      return;
+    }
+
+    conn.textContent =
+      'testing…';
+
+    try{
+      const res =
+        await fetch(
+          `https://api.github.com/repos/${owner}/${repo}`,
+          {
+            headers:
+              ghHeaders(token)
+          }
+        );
+
+      if(res.ok){
+        conn.textContent =
+          `connected to ${owner}/${repo} ✓`;
+      }else{
+        conn.textContent =
+          `could not connect (${res.status}) — check owner/repo/token.`;
+      }
+
+    }catch(e){
+      console.error(
+        'GitHub connection test failed:',
+        e
+      );
+
+      conn.textContent =
+        'connection error — check your internet connection.';
+    }
+  }
+);
+
+/* ---- Old data migration ---- */
+
+async function migrateOldData(){
+  if(
+    localStorage.getItem(
+      'metaAtlas_migrated_v2'
+    )
+  ){
+    return;
+  }
+
+  const oldKeys =
+    Object.keys(
+      localStorage
+    ).filter(
+      k =>
+        k.startsWith('metaAtlas_') &&
+        !k.startsWith('metaAtlas_notes_') &&
+        k !== 'metaAtlas_migrated_v2' &&
+        k !== GH_SETTINGS_KEY
+    );
+
+  for(const key of oldKeys){
+    const code =
+      key.replace(
+        'metaAtlas_',
+        ''
+      );
+
+    try{
+      const parsed =
+        JSON.parse(
+          localStorage.getItem(key)
+        );
+
+      if(parsed.notes){
+        saveNotes(
+          code,
+          parsed.notes
+        );
+      }
+
+      if(
+        Array.isArray(
+          parsed.images
+        )
+      ){
+        for(
+          const src of parsed.images
+        ){
+          try{
+            await addImage(
+              code,
+              src
+            );
+          }catch(e){
+            /* Skip images that fail to migrate. */
+          }
+        }
+      }
+
+      localStorage.removeItem(
+        key
+      );
+
+    }catch(e){
+      /*
+       * Leave malformed entries alone
+       * rather than destroying user data.
+       */
+    }
+  }
+
+  localStorage.setItem(
+    'metaAtlas_migrated_v2',
+    '1'
+  );
+}
+
+/* ---- Startup ---- */
+
+migrateOldData().then(
+  () => {
+    if(activeName){
+      renderDossier(
+        activeName
+      );
+    }
+  }
+);
+
+searchInput.addEventListener(
+  'input',
+  () => renderList(
+    searchInput.value
+  )
+);
 
 renderList();
 </script>
