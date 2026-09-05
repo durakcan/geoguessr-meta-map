@@ -667,7 +667,21 @@ async function silentPullCountry(code){
   }
 }
 
+const pushQueues = {}; // one queue per country code, so pushes never overlap for the same country
+
 async function silentPushCountry(code, name){
+  // Chain onto any push already in flight for this country, so two rapid
+  // edits (e.g. typing a note right after adding an image) never race
+  // each other and hit a version conflict.
+  const prev = pushQueues[code] || Promise.resolve();
+  const run = prev.then(() => pushCountryOnce(code, name));
+  pushQueues[code] = run.catch(() => {}); // keep the chain alive even if this one failed
+  return run;
+}
+
+function delay(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+async function pushCountryOnce(code, name, attempt = 1){
   const { owner, repo, branch, token } = getGhSettings();
   if(!owner || !repo || !token) return { ok:false, error:'not connected' };
   try{
@@ -682,8 +696,15 @@ async function silentPushCountry(code, name){
     );
     return { ok:true };
   }catch(err){
+    const msg = (err && err.message ? err.message : String(err));
+    // 409 = the file changed on GitHub between our read and write (stale sha).
+    // Wait briefly (letting GitHub's backend catch up), then re-fetch and retry.
+    if(msg.includes('(409)') && attempt < 5){
+      await delay(400 * attempt);
+      return pushCountryOnce(code, name, attempt + 1);
+    }
     console.error('Auto-push failed:', err);
-    return { ok:false, error: (err && err.message ? err.message : String(err)).slice(0, 160) };
+    return { ok:false, error: msg.slice(0, 160) };
   }
 }
 
